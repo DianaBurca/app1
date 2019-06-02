@@ -33,7 +33,7 @@ func main() {
 	http.HandleFunc("/compute", func(w http.ResponseWriter, r *http.Request) {
 		result := map[uint64]uint64{}
 
-		for i := uint64(0); i < 10; i++ {
+		for i := uint64(0); i < 15; i++ {
 			result[i] = Factorial(uint64(i))
 		}
 
