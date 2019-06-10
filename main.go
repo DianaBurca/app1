@@ -16,6 +16,7 @@ func Factorial(n uint64) (result uint64) {
 func main() {
 	driver := gin.Default()
 	driver.GET("/hello", utils.HelloHandler)
+	driver.GET("/test", utils.TestHandler)
 	driver.GET("/.well-known/live", utils.Health)
 	driver.GET("/.well-known/ready", utils.Health)
 	driver.POST("/store-data", utils.StoreData)

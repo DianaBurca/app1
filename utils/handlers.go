@@ -48,3 +48,11 @@ func StoreData(c *gin.Context) {
 func toString(p map[string]string) string {
 	return fmt.Sprintf("ID: %s || Name: %s\n", p["id"], p["name"])
 }
+
+func TestHandler(c *gin.Context) {
+	output := map[string]string{
+		"message": "test",
+		"status":  "200",
+	}
+	c.JSON(http.StatusOK, output)
+}
