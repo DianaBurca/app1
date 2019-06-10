@@ -17,6 +17,7 @@ clean:
 	rm -f ${CURRENT_DIR}/${BINARY}-linux-${GOARCH}
 
 linux:
+	go get ./...
 	@echo ">> building linux binary"
 	GOOS=linux GOARCH=${GOARCH} go build ${LDFLAGS} -o ${BINARY}-linux-${GOARCH} . ;
 
