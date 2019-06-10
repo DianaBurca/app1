@@ -1,8 +1,8 @@
 package main
 
 import (
-	"encoding/json"
-	"net/http"
+	"github.com/DianaBurca/app1/internal"
+	"github.com/gin-gonic/gin"
 )
 
 func Factorial(n uint64) (result uint64) {
@@ -14,31 +14,11 @@ func Factorial(n uint64) (result uint64) {
 }
 
 func main() {
-	http.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		output := map[string]string{
-			"message": "I am the second app and I work fine",
-			"status":  "200",
-		}
-		json.NewEncoder(w).Encode(output)
-	})
+	driver := gin.Default()
+	driver.GET("/hello", internal.HelloHandler)
+	driver.GET("/.well-known/live", internal.Health)
+	driver.GET("/.well-known/ready", internal.Health)
+	driver.POST("/store-data", internal.StoreData)
 
-	http.HandleFunc("/.well-known/live", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-	})
-
-	http.HandleFunc("/.well-known/ready", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-	})
-
-	http.HandleFunc("/compute", func(w http.ResponseWriter, r *http.Request) {
-		result := map[uint64]uint64{}
-
-		for i := uint64(0); i < 15; i++ {
-			result[i] = Factorial(uint64(i))
-		}
-
-		json.NewEncoder(w).Encode(result)
-	})
-
-	http.ListenAndServe(":8080", nil)
+	driver.Run()
 }

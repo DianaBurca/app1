@@ -12,3 +12,4 @@
 *.out
 
 ./build/app1-linux-amd64
+./data.txt
